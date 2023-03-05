@@ -15,7 +15,9 @@ d3.json(url).then(function(data) {
         return d;
         });
     var samples = data.samples
+    optionChanged(data.names[0])
             });
+
 
 function getTopIndex(vals){
     var idx = []
@@ -92,12 +94,12 @@ function optionChanged(value){
         
         // Generate metadata box
         var metaData = data.metadata[i]
-        var textOutput = ''
+        d3.select('#sample-metadata').selectAll("p").remove()
         for (const [key, value] of Object.entries(metaData)){
-            textOutput = textOutput + '\r\n' + key.toString() + ':' + value.toString()
+            d3.select('#sample-metadata')
+            .append("p")
+            .text(key.toString() + ':' + value.toString());
         }
-        d3.select('#sample-metadata')
-        .append("text")
-        .text(textOutput);
+        
     });
 };
